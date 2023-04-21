@@ -1,40 +1,59 @@
+import geocoder
+
 class Typology:
+    def __init__(self):
+        self._typology = []
 
     def get_typology(self):
-        pass
+        return self._typology
+
+    def set_typology(self, type):
+        self._typology.append(type)
 
 class Search:
+    def __init__(self, address = None):
+        self._address = address
 
     def get_addr(self):
+        return self._address
+
+    def set_addr(self, adrs):
+        # Verifying the address should done in this function
+        self._address = adrs
+
+
+class RouteFinder:
+
+    def __init__(self, curr = None, route = None):
+        self._curr = curr
+        self._search = Search()
+        self._typology = Typology()
+        self._route = route
+
+
+    def set_curr(self):
+        g = geocoder.ip('me')
+        self._curr = g.latlng
+
+    def set_shortest_route(self):
         pass
 
-    def verify_addr(self):
-        pass
-
-class LookupAddress:
-
-    def __init__(self):
-        self.Starting_point = None
-        self.Destination = Search()
-        self.Typology = None
-
-
-    def get_curr_location(self):
-        pass
-
-    def shortest_route(self):
-        pass
+    def get_shortest_route(self):
+        return self._route
 
     def calc_danger_level(self):
         pass
 
 class Amenities:
+    def __init__(self):
+        self._amenities = []
 
     def get_amenities(self):
-        pass
+        return self._amenities
 
-    def get_amenity_addr(self):
-        pass
+    def set_amenities(self, amenity):
+        self._amenities.append(amenity)
+
 
 class Map:
     def __init__(self):
