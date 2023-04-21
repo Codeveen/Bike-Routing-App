@@ -58,9 +58,9 @@ class Amenities:
 class Map:
     def __init__(self):
         self.Map = None
-        self.Route = None
-        self.Amenities = None
-        self.Danger_Level = None
+        self._route = RouteFinder()
+        self._amenities = Amenities()
+        self.typology = Typology()
 
     def get_map(self):
         pass
