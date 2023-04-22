@@ -10,23 +10,23 @@ class Typology:
     def set_typology(self, type):
         self._typology.append(type)
 
-class Search:
+class Destination:
     def __init__(self, address = None):
         self._address = address
 
-    def get_addr(self):
+    def get_address(self):
         return self._address
 
-    def set_addr(self, adrs):
+    def set_address(self, adrs):
         # Verifying the address should done in this function
         self._address = adrs
 
 
-class RouteFinder:
+class Route:
 
     def __init__(self, curr = None, route = None):
-        self._curr = curr
-        self._search = Search()
+        self._curr_loc = curr
+        self._destination = Destination()
         self._typology = Typology()
         self._route = route
 
@@ -48,6 +48,7 @@ class Amenities:
     def __init__(self):
         self._amenities = []
 
+
     def get_amenities(self):
         return self._amenities
 
@@ -58,7 +59,7 @@ class Amenities:
 class Map:
     def __init__(self):
         self.Map = None
-        self._route = RouteFinder()
+        self._route = Route()
         self._amenities = Amenities()
         self.typology = Typology()
 
@@ -72,4 +73,7 @@ class Map:
         pass
 
     def get_directions(self):
+        pass
+
+    def display_amenities(self):
         pass
