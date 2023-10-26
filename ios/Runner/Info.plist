@@ -24,6 +24,7 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<string>pk.eyJ1IjoiYmRiZXJnZXZpbiIsImEiOiJjbG8zNzg5YnAxcnFsMmpvOXkxbjI3N3ZmIn0.m9lc1OqpRbuurF5y7mo3YQ</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -1,47 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+import 'ui/splash.dart';
+
+late SharedPreferences sharedPreferences;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedPreferences = await SharedPreferences.getInstance();
+  await dotenv.load(fileName: "assets/config/.env");
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(),
+      title: 'Modeshift Kalamazoo Bike Routing',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.dark,
+      home: const Splash(),
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-    @override
-    Widget build(BuildContext context) {
-      return FlutterMap(
-        options: MapOptions(
-          center: LatLng(-85.5872, 42.2917),
-          zoom: 10,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate:'https://api.mapbox.com/styles/v1/praveen28/clnokbex2008g01qu33nrfvas/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicHJhdmVlbjI4IiwiYSI6ImNsbWs0YngwOTA5YjAyc280eWJzdWptOWgifQ.cVTUe_NY8GChWktCpxL_DA',
-            additionalOptions: {
-              'accessToken': 'pk.eyJ1IjoicHJhdmVlbjI4IiwiYSI6ImNsbWs0YngwOTA5YjAyc280eWJzdWptOWgifQ.cVTUe_NY8GChWktCpxL_DA',
-              'id': 'mapbox.mapbox-streets-v8'
-            },
-          ),
-        ],
-      );
-    }
 }
