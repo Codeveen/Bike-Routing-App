@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:nav_application/main.dart';
-
-import '../screens/biking_map.dart';
+import 'package:nav_application/screens/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -46,7 +45,7 @@ class _SplashState extends State<Splash> {
 
     // Get and store the directions API reponse in sharedPreferences
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (_) => const BikingMap()), (route) => false);
+        MaterialPageRoute(builder: (_) => const Home()), (route) => false);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ui/splash.dart';
@@ -20,12 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Modeshift Kalamazoo Bike Routing',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: ThemeMode.dark,
-      home: const Splash(),
-    );
+        title: 'Modeshift Kalamazoo Bike Routing',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.indigo,
+            textTheme:
+                GoogleFonts.openSansTextTheme(Theme.of(context).textTheme)),
+        home: const Splash());
   }
 }
