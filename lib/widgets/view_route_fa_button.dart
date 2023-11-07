@@ -13,6 +13,7 @@ Widget viewRouteFaButton(BuildContext context) {
         LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
         Map modifiedResponse =
             await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
+        print(modifiedResponse.toString());
 
         Navigator.push(
             context,

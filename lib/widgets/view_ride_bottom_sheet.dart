@@ -29,15 +29,16 @@ Widget viewRideBottomSheet(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: ListTile(
                     tileColor: Colors.grey[200],
-                    leading: const Image(
+                    /*leading: const Image(
                         image: AssetImage('assets/image/sport-car.png'),
                         height: 50,
-                        width: 50),
-                    title: const Text('Premier',
+                        width: 50),*/
+                    /*title: const Text('Premier',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    subtitle: Text('$distance km, $dropOffTime drop off'),
-                    trailing: const Text('\$384.22',
+                            fontSize: 18, fontWeight: FontWeight.bold)),*/
+                    // Add ability to determine whether minutes or hours/minutes
+                    title: Text('$distance km, $dropOffTime min'),
+                    trailing: const Text('Stress Level: 1',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
                   ),
@@ -47,10 +48,10 @@ Widget viewRideBottomSheet(
                         MaterialPageRoute(builder: (_) => const Navigation())),
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(20)),
-                    child: Row(
+                    child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('Start your route now'),
+                        children: [
+                          Text('Start Route'),
                         ])),
               ]),
         ),

@@ -42,6 +42,7 @@ class _ViewRouteState extends State<ViewRoute> {
     super.initState();
   }
 
+  // Fix time and distance to be relavent
   _initialiseDirectionsResponse() {
     distance = (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1);
     dropOffTime = getDropOffTime(widget.modifiedResponse['duration']);
@@ -116,7 +117,7 @@ class _ViewRouteState extends State<ViewRoute> {
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(11, 11),
+                minMaxZoomPreference: const MinMaxZoomPreference(10, 14),
               ),
             ),
             viewRideBottomSheet(context, distance, dropOffTime),

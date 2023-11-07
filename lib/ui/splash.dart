@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:nav_application/main.dart';
-import 'package:nav_application/screens/home.dart';
+
+import '../helpers/mapbox_handler.dart';
+import '../main.dart';
+import '../screens/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -36,12 +38,17 @@ class _SplashState extends State<Splash> {
 
     // Get current user location
     LocationData locationData = await location.getLocation();
-    LatLng currentLatLng =
+    LatLng currentLocation =
         LatLng(locationData.latitude!, locationData.longitude!);
+
+    // Get the current user address
+    String currentAddress =
+        (await getParsedReverseGeocoding(currentLocation))['place'];
 
     // Store the user location in sharedPreferences
     sharedPreferences.setDouble('latitude', locationData.latitude!);
     sharedPreferences.setDouble('longitude', locationData.longitude!);
+    sharedPreferences.setString('current-address', currentAddress);
 
     // Get and store the directions API reponse in sharedPreferences
     Navigator.pushAndRemoveUntil(context,

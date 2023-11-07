@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:nav_application/screens/home.dart';
 
 import '../helpers/shared_prefs.dart';
+import '../screens/home.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
