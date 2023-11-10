@@ -6,5 +6,5 @@ String getDropOffTime(num duration) {
   DateTime tripEndDateTime =
       DateTime.now().add(Duration(minutes: minutes, seconds: seconds));
   String dropOffTime = DateFormat.jm().format(tripEndDateTime);
-  return dropOffTime;
+  return minutes.toString();
 }

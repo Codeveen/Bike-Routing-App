@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -18,7 +20,7 @@ Future getCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
     final responseData = await _dio.get(url);
     return responseData.data;
   } on DioExceptions catch (e) {
-    print(e.toString());
+    log(e.toString());
     /*final errorMessage = DioExceptions.fromDioError(e as DioError).toString();
     debugPrint(errorMessage);*/
     // check response.data

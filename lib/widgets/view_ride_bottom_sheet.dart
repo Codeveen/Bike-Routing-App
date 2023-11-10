@@ -37,7 +37,7 @@ Widget viewRideBottomSheet(
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),*/
                     // Add ability to determine whether minutes or hours/minutes
-                    title: Text('$distance km, $dropOffTime min'),
+                    title: Text('$distance mi, $dropOffTime min'),
                     trailing: const Text('Stress Level: 1',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),

@@ -42,9 +42,10 @@ class _ViewRouteState extends State<ViewRoute> {
     super.initState();
   }
 
-  // Fix time and distance to be relavent
+  // TODO: Fix time and distance to be relavent
   _initialiseDirectionsResponse() {
-    distance = (widget.modifiedResponse['distance'] / 1000).toStringAsFixed(1);
+    distance =
+        (widget.modifiedResponse['distance'] / 1609.344).toStringAsFixed(1);
     dropOffTime = getDropOffTime(widget.modifiedResponse['duration']);
     geometry = widget.modifiedResponse['geometry'];
   }

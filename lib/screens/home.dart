@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
-                myLocationEnabled: true,
+                myLocationEnabled: false,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
                 minMaxZoomPreference: const MinMaxZoomPreference(14, 17),
               ),
