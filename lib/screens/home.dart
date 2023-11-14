@@ -31,34 +31,61 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
       body: SafeArea(
         child: Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.9,
               child: MapboxMap(
                 accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
-                myLocationEnabled: false,
+                myLocationEnabled: true,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
                 minMaxZoomPreference: const MinMaxZoomPreference(14, 17),
               ),
             ),
+            IconButton(
+              onPressed: () {
+                controller.animateCamera(
+                    CameraUpdate.newCameraPosition(_initialCameraPosition));
+              },
+              icon: const Icon(Icons.my_location_rounded),
+              iconSize: 45,
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.large(
+        backgroundColor: Colors.blue,
+        foregroundColor: const Color.fromARGB(255, 255, 204, 38),
+        shape: const CircleBorder(),
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => const PrepareRoute()));
         },
-        child: const Icon(Icons.search),
+        child: const Icon(
+          Icons.search,
+          size: 50,
+        ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.edit_road_rounded),
+              label: 'Stress Level',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.format_list_bulleted_rounded),
+              label: 'Amenities',
+            ),
+          ],
+          backgroundColor: Colors.blue[400],
+          iconSize: 35,
+          selectedItemColor: Colors.white,
+          onTap: (int index) {}),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

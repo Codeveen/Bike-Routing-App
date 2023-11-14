@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nav_application/widgets/endpoints_card.dart';
 import 'package:nav_application/widgets/search_listview.dart';
 
-import '../widgets/view_route_fa_button.dart';
+import '../widgets/prepare_route_fa_button.dart';
 
 class PrepareRoute extends StatefulWidget {
   const PrepareRoute({Key? key}) : super(key: key);
@@ -60,6 +61,8 @@ class _PrepareRouteState extends State<PrepareRoute> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Prepare Route'),
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.raleway(fontSize: 25),
       ),
       body: SafeArea(
           child: SingleChildScrollView(

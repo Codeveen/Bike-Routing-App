@@ -33,7 +33,7 @@ class _LocationFieldState extends State<LocationField> {
     // Set isLoading = true in parent
     PrepareRoute.of(context)?.isLoading = true;
 
-    // Make sure that requests are not madeuntil 1 second after typing stops
+    // Make sure that requests are not made until 1 second after typing stops
     if (searchOnStoppedTyping != null) {
       setState(() => searchOnStoppedTyping?.cancel());
     }

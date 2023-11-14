@@ -13,12 +13,11 @@ Widget viewRouteFaButton(BuildContext context) {
         LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
         Map modifiedResponse =
             await getDirectionsAPIResponse(sourceLatLng, destinationLatLng);
-        print(modifiedResponse.toString());
 
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (_) => ViewRoute(modifiedResponse: modifiedResponse)));
       },
-      label: const Text('Review Route'));
+      label: const Text('View Route'));
 }

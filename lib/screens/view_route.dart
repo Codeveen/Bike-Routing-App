@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/commons.dart';
@@ -106,6 +107,8 @@ class _ViewRouteState extends State<ViewRoute> {
             },
             icon: const Icon(Icons.arrow_back)),
         title: const Text('Review Ride'),
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.raleway(fontSize: 25),
       ),
       body: SafeArea(
         child: Stack(
