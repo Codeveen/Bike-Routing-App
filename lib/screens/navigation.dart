@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
@@ -62,6 +64,7 @@ class _NavigationState extends State<Navigation> {
     wayPoints.add(destinationWaypoint);
 
     // Start the trip
+    log("await directions.startNavigation");
     await directions.startNavigation(wayPoints: wayPoints, options: _options);
   }
 

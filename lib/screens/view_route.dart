@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/commons.dart';
-import '../helpers/mapbox_handler.dart';
 import '../helpers/shared_prefs.dart';
 import '../widgets/view_ride_bottom_sheet.dart';
 
@@ -33,13 +32,13 @@ class _ViewRouteState extends State<ViewRoute> {
     _initialiseDirectionsResponse();
 
     // initialise initialCameraPosition, address and trip end points
-    _initialCameraPosition = CameraPosition(
-        target: getCenterCoordinatesForPolyline(geometry), zoom: 11);
-
     for (String type in ['source', 'destination']) {
       _kTripEndPoints
           .add(CameraPosition(target: getTripLatLngFromSharedPrefs(type)));
     }
+
+    _initialCameraPosition =
+        CameraPosition(target: _kTripEndPoints[0].target, zoom: 12);
     super.initState();
   }
 
@@ -61,7 +60,7 @@ class _ViewRouteState extends State<ViewRoute> {
       await controller.addSymbol(
         SymbolOptions(
           geometry: _kTripEndPoints[i].target,
-          iconSize: 0.1,
+          iconSize: 0.175,
           iconImage: "assets/icon/$iconImage.png",
         ),
       );
@@ -101,11 +100,6 @@ class _ViewRouteState extends State<ViewRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back)),
         title: const Text('Review Ride'),
         centerTitle: true,
         titleTextStyle: GoogleFonts.raleway(fontSize: 25),
@@ -121,7 +115,7 @@ class _ViewRouteState extends State<ViewRoute> {
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(10, 14),
+                minMaxZoomPreference: const MinMaxZoomPreference(11, 14),
               ),
             ),
             viewRideBottomSheet(context, distance, dropOffTime),
