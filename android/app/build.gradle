@@ -69,8 +69,11 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //implementation "com.mapbox.navigation:android:2.10.1"
+    //implementation "com.mapbox.navigation:ui-dropin:2.10.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'com.mapbox.maps:android:10.2.0'
+    
 }
 
 configurations {
