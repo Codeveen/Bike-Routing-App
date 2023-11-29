@@ -1,3 +1,5 @@
+// Make tile title parse of 'place' up to the first comma
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -34,10 +36,12 @@ Widget searchListView(
               height: double.infinity,
               child: CircleAvatar(child: Icon(Icons.map)),
             ),
-            title: Text(responses[index]['name'],
+            title: Text(responses[index]['address'],
                 style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(responses[index]['address'],
-                overflow: TextOverflow.ellipsis),
+            subtitle: Text(
+              responses[index]['postcode'],
+              overflow: TextOverflow.visible,
+            ),
           ),
           const Divider(),
         ],

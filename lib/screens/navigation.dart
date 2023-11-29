@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 //import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
 import 'package:flutter_mapbox_navigation/library.dart';
@@ -40,19 +38,23 @@ class _NavigationState extends State<Navigation> {
   }
 
   Future<void> initialize() async {
+    print("hello");
     if (!mounted) return;
+    print("if (!mounted) return");
 
     // Setup directions and options
     directions = MapBoxNavigation(onRouteEvent: _onRouteEvent);
+    print("directions = MapBoxNavigation(onRouteEvent: _onRouteEvent)");
     _options = MapBoxOptions(
         zoom: 18.0,
         voiceInstructionsEnabled: true,
         bannerInstructionsEnabled: true,
-        mode: MapBoxNavigationMode.drivingWithTraffic,
+        mode: MapBoxNavigationMode.cycling,
         isOptimized: true,
         units: VoiceUnits.metric,
         simulateRoute: true,
         language: "en");
+    print("MapBoxOptions");
 
     // Configure waypoints
     sourceWaypoint = WayPoint(
@@ -63,10 +65,12 @@ class _NavigationState extends State<Navigation> {
         longitude: destination.longitude);
     wayPoints.add(sourceWaypoint);
     wayPoints.add(destinationWaypoint);
+    print("waypoints");
 
     // Start the trip
-    log("await directions.startNavigation");
+
     await directions.startNavigation(wayPoints: wayPoints, options: _options);
+    print("await directions.startNavigation");
   }
 
   @override

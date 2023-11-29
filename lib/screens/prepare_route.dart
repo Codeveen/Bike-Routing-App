@@ -89,4 +89,3 @@ class _PrepareRouteState extends State<PrepareRoute> {
     );
   }
 }
-// KZOO LatLng: 42.29022370217956, -85.58727797138698

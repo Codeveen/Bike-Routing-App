@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
         child: Stack(
           children: [
             SizedBox(
+              // Display Map
               height: MediaQuery.of(context).size.height * 0.9,
               child: MapboxMap(
                 accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],

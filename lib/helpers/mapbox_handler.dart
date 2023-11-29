@@ -26,8 +26,9 @@ Future<List> getParsedResponseForQuery(String value) async {
   for (var feature in features) {
     Map response = {
       'name': feature['text'],
-      'address': feature['place_name'].split('${feature['text']}, ')[1],
+      'address': feature['place_name'].split(',')[0],
       'place': feature['place_name'],
+      'postcode': feature['place_name'].split('${feature['text']}, ')[1],
       'location': LatLng(feature['center'][1], feature['center'][0])
     };
     parsedResponses.add(response);
@@ -41,8 +42,9 @@ Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
   Map feature = response['features'][0];
   Map revGeocode = {
     'name': feature['text'],
-    'address': feature['place_name'].split('${feature['text']}, ')[1],
+    'address': feature['place_name'].split(',')[0],
     'place': feature['place_name'],
+    'postcode': feature['place_name'].split('${feature['text']}, ')[1],
     'location': latLng
   };
   return revGeocode;
