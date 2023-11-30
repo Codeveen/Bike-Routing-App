@@ -1,5 +1,3 @@
-// Make tile title parse of 'place' up to the first comma
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';

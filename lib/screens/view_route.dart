@@ -42,7 +42,6 @@ class _ViewRouteState extends State<ViewRoute> {
     super.initState();
   }
 
-  // TODO: Fix time and distance to be relavent
   _initialiseDirectionsResponse() {
     distance =
         (widget.modifiedResponse['distance'] / 1609.344).toStringAsFixed(1);
@@ -91,7 +90,7 @@ class _ViewRouteState extends State<ViewRoute> {
         lineColor: Colors.indigo.toHexStringRGB(),
         lineCap: "round",
         lineJoin: "round",
-        lineWidth: 3,
+        lineWidth: 4,
       ),
     );
   }
@@ -115,7 +114,7 @@ class _ViewRouteState extends State<ViewRoute> {
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(11, 14),
+                minMaxZoomPreference: const MinMaxZoomPreference(11, 16),
               ),
             ),
             viewRideBottomSheet(context, distance, dropOffTime),

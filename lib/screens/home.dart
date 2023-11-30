@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:nav_application/screens/prepare_route.dart';
-import 'package:nav_application/widgets/amenity_toggle.dart';
 
 import '../helpers/shared_prefs.dart';
-import '../widgets/topology_toggle.dart';
+import '../screens/prepare_route.dart';
+import '../widgets/home_bottom_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,7 +17,6 @@ class _HomeState extends State<Home> {
   LatLng latLng = getCurrentLatLngFromSharedPrefs();
   late CameraPosition _initialCameraPosition;
   late MapboxMapController controller;
-  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -34,6 +32,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    /*controller.addSymbol(
+      const SymbolOptions(
+        geometry: LatLng(-33.86711, 151.1947171),
+        iconImage: "assets/icon/burger.png",
+      ),
+    );*/
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -63,7 +67,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      // Prepare Route Button
+      // Search button
       floatingActionButton: FloatingActionButton.large(
         backgroundColor: Colors.blue,
         foregroundColor: const Color.fromARGB(255, 255, 204, 38),
@@ -77,80 +81,8 @@ class _HomeState extends State<Home> {
           size: 50,
         ),
       ),
-      // Bottom Bar with Topologies and Amenities
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit_road_rounded),
-            label: 'Stress Level',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.format_list_bulleted_rounded),
-            label: 'Amenities',
-          ),
-        ],
-        backgroundColor: Colors.blue[400],
-        iconSize: 35,
-        selectedItemColor: Colors.white,
-        currentIndex: selectedIndex,
-        onTap: (int index) {
-          switch (index) {
-            case 0:
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    scrollable: true,
-                    title: const Text("Street Topologies"),
-                    content: const Padding(
-                      padding: EdgeInsets.all(0),
-                      child: TopologyToggle(),
-                    ),
-                    actions: [
-                      ElevatedButton(
-                        child: const Text("Done"),
-                        onPressed: () {
-                          // Add captureSelection
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-              break;
-            case 1:
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    scrollable: true,
-                    title: const Text("Amenities"),
-                    content: const Padding(
-                      padding: EdgeInsets.all(0),
-                      child: AmenityToggle(),
-                    ),
-                    actions: [
-                      ElevatedButton(
-                        child: const Text("Done"),
-                        onPressed: () {
-                          // Add captureSelection
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-              break;
-          }
-          setState(
-            () {
-              selectedIndex = index;
-            },
-          );
-        },
-      ),
+      // Bottom bar with topology and amenity selection plus alignment
+      bottomNavigationBar: const HomeBottomBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

@@ -7,14 +7,23 @@ class TopologyToggle extends StatefulWidget {
   State<TopologyToggle> createState() => _TopologyToggleState();
 }
 
-class _TopologyToggleState extends State<TopologyToggle> {
-  List<Option> options = [
-    Option('Neighborhood Streets', true),
-    Option('Connector Streets', true),
-    Option('Sub-Urban Streets', true),
-    Option('Main Streets', true),
-  ];
+List<Option> options = [
+  Option('Neighborhood Streets', true),
+  Option('Connector Streets', true),
+  Option('Sub-Urban Streets', true),
+  Option('Main Streets', true),
+];
 
+captureSelection(List<Option> options) async {
+  List selections = [];
+  for (Option option in options) {
+    selections.add(option.isSelected);
+  }
+  return selections;
+}
+
+class _TopologyToggleState extends State<TopologyToggle> {
+  List tSelections = [true, true, true, true];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +34,8 @@ class _TopologyToggleState extends State<TopologyToggle> {
           onChanged: (bool? value) {
             setState(() {
               option.isSelected = value!;
+              tSelections = captureSelection(options);
+              Navigator.pop(context, [tSelections]);
             });
           },
         );
@@ -38,8 +49,4 @@ class Option {
   bool isSelected;
 
   Option(this.label, this.isSelected);
-}
-
-captureSelection() async {
-  // Capture current boolean for each option in order to store
 }
