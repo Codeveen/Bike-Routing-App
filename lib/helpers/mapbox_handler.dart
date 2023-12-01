@@ -1,5 +1,4 @@
-import 'package:mapbox_gl/mapbox_gl.dart';
-
+import '../helpers/latlng.dart';
 import '../requests/directions.dart';
 import '../requests/rev_geocoding.dart';
 import '../requests/search.dart';
