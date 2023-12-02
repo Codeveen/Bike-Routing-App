@@ -272,38 +272,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  mapbox_gl:
-    dependency: "direct main"
-    description:
-      name: mapbox_gl
-      sha256: "6b8b04dcf2e4df22b80629510660bb8c496370f28eff1656a0f684413b9901ef"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.0"
-  mapbox_gl_dart:
-    dependency: transitive
-    description:
-      name: mapbox_gl_dart
-      sha256: de6d03718e5eb05c9eb1ddaae7f0383b28acb5afa16405e1deed7ff04dd34f3d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1"
-  mapbox_gl_platform_interface:
-    dependency: transitive
-    description:
-      name: mapbox_gl_platform_interface
-      sha256: "0dcdc9f6409f290a2e1ab30178d560a33e952196cf73ae72b6b3167c3a3713b7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.0"
-  mapbox_gl_web:
-    dependency: transitive
-    description:
-      name: mapbox_gl_web
-      sha256: "47444c55557c072ddd57abc38cdc3de7448ee2534d3df7315d250458f30ec558"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.0"
   matcher:
     dependency: transitive
     description:

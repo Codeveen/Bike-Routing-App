@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import '../helpers/latlng.dart';
 
 import '../helpers/dio_exceptions.dart';
 
