@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:mapbox_gl/mapbox_gl.dart';
-import '../helpers/custom_ui.dart';
-import '../helpers/map.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
-import '../helpers/camera_position.dart';
-import '../Controls/custome_controller.dart';
-import '../helpers/latlng.dart';
 import '../helpers/shared_prefs.dart';
 import '../screens/prepare_route.dart';
 import '../widgets/home_bottom_bar.dart';

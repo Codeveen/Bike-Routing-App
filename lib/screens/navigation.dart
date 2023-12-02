@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
-<<<<<<< HEAD
-=======
-import '../helpers/latlng.dart';
-// import 'package:flutter_mapbox_navigation/library.dart';
-// import 'package:mapbox_gl/mapbox_gl.dart';
->>>>>>> 9fbccfbaddd89bfcb91dac6eef466549d9835833
 
 // import 'package:flutter_mapbox_navigation/library.dart';
 import '../helpers/latlng.dart';
@@ -29,7 +23,7 @@ class _NavigationState extends State<Navigation> {
   // Config variables for Mapbox Navigation
   late MapBoxNavigation directions;
   //late MapBoxOptions _options;
-  // double _distanceRemaining, _durationRemaining;
+  late double distanceRemaining, durationRemaining;
   late MapBoxNavigationViewController _controller;
   final bool isMultipleStop = false;
   String instruction = "";
@@ -85,8 +79,8 @@ class _NavigationState extends State<Navigation> {
   }
 
   Future<void> _onRouteEvent(e) async {
-    // _distanceRemaining = await MapBoxNavigation.instance.getDistanceRemaining();
-    // _durationRemaining = await MapBoxNavigation.instance.getDurationRemaining();
+    // distanceRemaining = await directions.distanceRemaining;
+    // durationRemaining = await directions.durationRemaining;
 
     switch (e.eventType) {
       case MapBoxEvent.progress_change:

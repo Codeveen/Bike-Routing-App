@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../Controls/custom_layer.dart';
-import '../Controls/custom_properties.dart';
-import '../Controls/custom_symbol.dart';
-import '../Controls/custome_controller.dart';
 // import 'package:mapbox_gl/mapbox_gl.dart';
 import '../helpers/camera_position.dart';
+import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+
 import '../helpers/commons.dart';
-import '../helpers/custom_color.dart';
-import '../helpers/custom_ui.dart';
-import '../helpers/map.dart';
 import '../helpers/shared_prefs.dart';
 import '../widgets/view_ride_bottom_sheet.dart';
 
