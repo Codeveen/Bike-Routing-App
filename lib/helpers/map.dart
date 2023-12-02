@@ -1,12 +1,14 @@
-import './camera_position.dart';
-import '../Controls/custome_controller.dart';
-import './custom_ui.dart';
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
-import '../Controls/platform_interface.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../Controls/custome_controller.dart';
+import '../Controls/platform_interface.dart';
+import './camera_position.dart';
+import './custom_ui.dart';
 
 enum AnnotationType { fill, line, circle, symbol }
 
@@ -281,8 +283,8 @@ class _MapboxMapState extends State<MapboxMap> {
       return;
     }
     final MapboxMapController controller = await _controller.future;
-    
-    controller._updateMapOptions(updates);
+
+    controller.updateMapOptions(updates);
   }
 
   Future<void> onPlatformViewCreated(int id) async {

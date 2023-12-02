@@ -1,18 +1,20 @@
 import 'dart:math';
-import './custom_location.dart';
-import '../helpers/camera_position.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'Fill.dart';
-import './tracking.dart';
-import './custom_symbol.dart';
-import './platform_interface.dart';
 import 'package:flutter/material.dart';
+
+import '../helpers/camera_position.dart';
+import './Circle.dart';
+import './Line.dart';
 import './arguments.dart';
 import './custom_layer.dart';
-import './Line.dart';
+import './custom_location.dart';
 import './custom_properties.dart';
-import './Circle.dart';
+import './custom_symbol.dart';
+import './platform_interface.dart';
+import './tracking.dart';
+import 'Fill.dart';
 
 typedef void OnMapClickCallback(Point<double> point, LatLng coordinates);
 
@@ -255,7 +257,7 @@ class MapboxMapController extends ChangeNotifier {
   /// platform side.
   ///
   /// The returned [Future] completes after listeners have been notified.
-  Future<void> _updateMapOptions(Map<String, dynamic> optionsUpdate) async {
+  Future<void> updateMapOptions(Map<String, dynamic> optionsUpdate) async {
     _cameraPosition = await _mapboxGlPlatform.updateMapOptions(optionsUpdate);
     notifyListeners();
   }

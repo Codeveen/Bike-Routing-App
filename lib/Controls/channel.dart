@@ -1,23 +1,21 @@
 // import 'dart:async';
-// import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'dart:convert';
-
-import './custom_symbol.dart';
-import './custom_properties.dart';
-import './platform_interface.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../helpers/camera_position.dart';
-import './custom_location.dart';
-import './Line.dart';
 import './Circle.dart';
 import './Fill.dart';
-import 'dart:math';
+import './Line.dart';
+import './custom_location.dart';
+import './custom_properties.dart';
+import './custom_symbol.dart';
+import './platform_interface.dart';
 import './tracking.dart';
-import 'package:flutter/material.dart';
-
-
 
 class MethodChannelMapboxGl extends MapboxGlPlatform {
   late MethodChannel _channel;
@@ -283,10 +281,9 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
   Future<LatLng> getSymbolLatLng(Symbol symbol) async {
     Map mapLatLng =
         await _channel.invokeMethod('symbol#getGeometry', <String, dynamic>{
-      'symbol': symbol._id,
+      'symbol': symbol.id,
     });
-    LatLng symbolLatLng =
-        new LatLng(mapLatLng['latitude'], mapLatLng['longitude']);
+    LatLng symbolLatLng = LatLng(mapLatLng['latitude'], mapLatLng['longitude']);
     return symbolLatLng;
   }
 
@@ -341,7 +338,7 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
   Future<List<LatLng>> getLineLatLngs(Line line) async {
     List latLngList =
         await _channel.invokeMethod('line#getGeometry', <String, dynamic>{
-      'line': line._id,
+      'line': line.id,
     });
     List<LatLng> resultList = [];
     for (var latLng in latLngList) {
