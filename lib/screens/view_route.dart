@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nav_application/Controls/custom_location.dart';
 
 import '../Controls/custom_layer.dart';
 import '../Controls/custom_properties.dart';
 import '../Controls/custom_symbol.dart';
 import '../Controls/custome_controller.dart';
+// import 'package:mapbox_gl/mapbox_gl.dart';
 import '../helpers/camera_position.dart';
 import '../helpers/commons.dart';
+import '../helpers/custom_color.dart';
 import '../helpers/custom_ui.dart';
 import '../helpers/map.dart';
 import '../helpers/shared_prefs.dart';
@@ -25,7 +26,7 @@ class ViewRoute extends StatefulWidget {
 class _ViewRouteState extends State<ViewRoute> {
   // Mapbox Maps SDK related
   final List<CameraPosition> _kTripEndPoints = [];
-  late MapboxMapController controller;
+  late MapBoxNavigationViewController controller;
   late CameraPosition _initialCameraPosition;
 
   // Directions API response related
@@ -56,7 +57,7 @@ class _ViewRouteState extends State<ViewRoute> {
     geometry = widget.modifiedResponse['geometry'];
   }
 
-  _onMapCreated(MapboxMapController controller) async {
+  _onMapCreated(MapBoxNavigationViewController controller) async {
     this.controller = controller;
   }
 
@@ -65,10 +66,7 @@ class _ViewRouteState extends State<ViewRoute> {
       String iconImage = i == 0 ? 'circle' : 'square';
       await controller.addSymbol(
         SymbolOptions(
-          // geometry: _kTripEndPoints[i].target,
-          // ^ Error: cannot assign LatLng to LatLng?
-          // Temp workaround below:
-          geometry: const LatLng(1, 1),
+          geometry: _kTripEndPoints[i].target,
           iconSize: 0.175,
           iconImage: "assets/icon/$iconImage.png",
         ),

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+<<<<<<< HEAD
+=======
+import '../helpers/latlng.dart';
+// import 'package:flutter_mapbox_navigation/library.dart';
+// import 'package:mapbox_gl/mapbox_gl.dart';
+>>>>>>> 9fbccfbaddd89bfcb91dac6eef466549d9835833
 
+// import 'package:flutter_mapbox_navigation/library.dart';
 import '../helpers/latlng.dart';
 import '../helpers/shared_prefs.dart';
 import '../screens/home.dart';
@@ -22,7 +29,7 @@ class _NavigationState extends State<Navigation> {
   // Config variables for Mapbox Navigation
   late MapBoxNavigation directions;
   //late MapBoxOptions _options;
-  late double distanceRemaining, durationRemaining;
+  // double _distanceRemaining, _durationRemaining;
   late MapBoxNavigationViewController _controller;
   final bool isMultipleStop = false;
   String instruction = "";
@@ -37,9 +44,10 @@ class _NavigationState extends State<Navigation> {
   }
 
   Future<void> initialize() async {
+    print("hello");
     if (!mounted) return;
+    print("if (!mounted) return");
 
-    // Setup directions and options
     MapBoxNavigation.instance.setDefaultOptions(MapBoxOptions(
         zoom: 18.0,
         voiceInstructionsEnabled: true,
@@ -49,8 +57,10 @@ class _NavigationState extends State<Navigation> {
         units: VoiceUnits.metric,
         simulateRoute: true,
         language: "en"));
-
+    // Setup directions and options
     MapBoxNavigation.instance.registerRouteEventListener(_onRouteEvent);
+    print("directions = MapBoxNavigation(onRouteEvent: _onRouteEvent)");
+    print("MapBoxOptions");
 
     // Configure waypoints
     sourceWaypoint = WayPoint(
@@ -61,9 +71,12 @@ class _NavigationState extends State<Navigation> {
         longitude: destination.longitude);
     wayPoints.add(sourceWaypoint);
     wayPoints.add(destinationWaypoint);
+    print("waypoints");
 
     // Start the trip
+
     await MapBoxNavigation.instance.startNavigation(wayPoints: wayPoints);
+    print("await directions.startNavigation");
   }
 
   @override
@@ -72,8 +85,8 @@ class _NavigationState extends State<Navigation> {
   }
 
   Future<void> _onRouteEvent(e) async {
-    // distanceRemaining = await directions.distanceRemaining;
-    // durationRemaining = await directions.durationRemaining;
+    // _distanceRemaining = await MapBoxNavigation.instance.getDistanceRemaining();
+    // _durationRemaining = await MapBoxNavigation.instance.getDurationRemaining();
 
     switch (e.eventType) {
       case MapBoxEvent.progress_change:
