@@ -8,38 +8,10 @@ class AmenityToggle extends StatefulWidget {
 }
 
 List<Option> options = [
-  Option(
-      'Resturants',
-      Image.asset(
-        "assets/icon/burger.png",
-        height: 30,
-        width: 30,
-      ),
-      false),
-  Option(
-      'Restrooms',
-      Image.asset(
-        "assets/icon/restroom.png",
-        height: 30,
-        width: 30,
-      ),
-      false),
-  Option(
-      'Bike Repair',
-      Image.asset(
-        "assets/icon/bike-repair.png",
-        height: 30,
-        width: 30,
-      ),
-      false),
-  Option(
-      'Bike Racks',
-      Image.asset(
-        "assets/icon/bike-parking.png",
-        height: 30,
-        width: 30,
-      ),
-      false),
+  Option('Bike Parking', const Icon(Icons.pedal_bike_rounded, size: 30), false),
+  Option('Cafe', const Icon(Icons.coffee, size: 30), false),
+  Option('Fast Food', const Icon(Icons.restaurant, size: 30), false),
+  Option('Bar', const Icon(Icons.local_bar_rounded, size: 30), false),
 ];
 
 class _AmenityToggleState extends State<AmenityToggle> {
@@ -64,12 +36,16 @@ class _AmenityToggleState extends State<AmenityToggle> {
 
 class Option {
   final String label;
-  Image icon;
+  Icon icon;
   bool isSelected;
 
   Option(this.label, this.icon, this.isSelected);
 }
 
 captureSelection() async {
-  // Capture current boolean for each option in order to store
+  List selections = [];
+  for (Option option in options) {
+    selections.add(option.isSelected);
+  }
+  return selections;
 }

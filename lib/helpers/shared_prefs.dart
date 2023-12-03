@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import '../helpers/latlng.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
+
 import '../main.dart';
 
 LatLng getCurrentLatLngFromSharedPrefs() {

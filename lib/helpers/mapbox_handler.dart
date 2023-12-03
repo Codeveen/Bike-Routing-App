@@ -1,4 +1,5 @@
-import '../helpers/latlng.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
+
 import '../requests/directions.dart';
 import '../requests/rev_geocoding.dart';
 import '../requests/search.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 
 import '../helpers/shared_prefs.dart';
 import '../screens/prepare_route.dart';
@@ -16,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   LatLng latLng = getCurrentLatLngFromSharedPrefs();
   late CameraPosition _initialCameraPosition;
-  late MapboxMapController controller;
+  late MaplibreMapController controller;
 
   @override
   void initState() {
@@ -24,7 +23,7 @@ class _HomeState extends State<Home> {
     _initialCameraPosition = CameraPosition(target: latLng, zoom: 12);
   }
 
-  _onMapCreated(MapboxMapController controller) async {
+  _onMapCreated(MaplibreMapController controller) async {
     this.controller = controller;
   }
 
@@ -32,12 +31,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    /*controller.addSymbol(
-      const SymbolOptions(
-        geometry: LatLng(-33.86711, 151.1947171),
-        iconImage: "assets/icon/burger.png",
-      ),
-    );*/
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -45,8 +38,7 @@ class _HomeState extends State<Home> {
             SizedBox(
               // Display Map
               height: MediaQuery.of(context).size.height * 0.9,
-              child: MapboxMap(
-                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+              child: MaplibreMap(
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
@@ -69,7 +61,7 @@ class _HomeState extends State<Home> {
       ),
       // Search button
       floatingActionButton: FloatingActionButton.large(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue, //
         foregroundColor: const Color.fromARGB(255, 255, 204, 38),
         shape: const CircleBorder(),
         onPressed: () {
@@ -81,7 +73,7 @@ class _HomeState extends State<Home> {
           size: 50,
         ),
       ),
-      // Bottom bar with topology and amenity selection plus alignment
+      // Bottom bar with topology and amenity selection plus button alignment
       bottomNavigationBar: const HomeBottomBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

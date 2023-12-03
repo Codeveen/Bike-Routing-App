@@ -11,16 +11,21 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flutter_mapbox_navigation: ^0.2.2
   shared_preferences: ^2.0.13
   flutter_native_splash: ^2.0.4
   location: ^4.3.0
   google_fonts: ^4.0.1
   flutter_dotenv: ^5.0.2
- 
   dio: ^4.0.4
   intl: ^0.17.0
-  flutter_rating_bar: ^4.0.0
+  graphhooper_route_navigation: ^0.0.3
+  get: ^4.6.5
+  flutter_mapbox_navigation: ^0.0.26
+  maplibre_gl:
+      git:
+        url: https://github.com/maplibre/flutter-maplibre-gl.git
+        ref: main
+
 
 dev_dependencies:
   flutter_test:

@@ -9,13 +9,14 @@ buildscript {
                 basic(BasicAuthentication)
             }
             credentials {
-                // Do not change the username below.
-                // This should always be `mapbox` (not your username).
                 username = "mapbox"
                 // Use the secret token you stored in gradle.properties as the password
-                password = "sk.eyJ1IjoiYmRiZXJnZXZpbiIsImEiOiJjbG8zN2FrMHoxdWZ1MnNwZHdnM25ibGw2In0.xfXI3-6lJ8oV4O9p7ayKDA"
+                password = project.hasProperty('MAPBOX_DOWNLOADS_TOKEN') ? project.property('MAPBOX_DOWNLOADS_TOKEN') : System.getenv('MAPBOX_DOWNLOADS_TOKEN')
+                if (password == null || password == "") {
+                    throw new GradleException("MAPBOX_DOWNLOADS_TOKEN isn't set. Set it to the project properties or to the enviroment variables.")
             }
         }
+    }
     }
 
     dependencies {

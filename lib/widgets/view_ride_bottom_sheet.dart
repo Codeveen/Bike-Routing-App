@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nav_application/screens/gh_nav.dart';
 
 import '../helpers/shared_prefs.dart';
-import '../screens/navigation.dart';
 
 Widget viewRideBottomSheet(
     BuildContext context, String distance, String dropOffTime) {
@@ -37,15 +37,16 @@ Widget viewRideBottomSheet(
                 ),
                 ElevatedButton(
                     onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const Navigation())),
+                        MaterialPageRoute(builder: (_) => const GHNav())),
                     style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(15)),
+                        padding: const EdgeInsets.all(15),
+                        backgroundColor: Colors.blue),
                     child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Start Route',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ])),
               ]),

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'Modeshift Kalamazoo Bike Routing',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.yellow,
             textTheme:
                 GoogleFonts.openSansTextTheme(Theme.of(context).textTheme)),
         home: const Splash());

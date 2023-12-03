@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 
-import '../helpers/latlng.dart';
 import '../helpers/mapbox_handler.dart';
 import '../helpers/shared_prefs.dart';
 import '../screens/view_route.dart';
 
 Widget viewRouteFaButton(BuildContext context) {
   return FloatingActionButton.extended(
-      icon: const Icon(Icons.pedal_bike),
+      icon: const Icon(
+        Icons.pedal_bike,
+        color: Colors.white,
+      ),
+      backgroundColor: Colors.blue,
       onPressed: () async {
         LatLng sourceLatLng = getTripLatLngFromSharedPrefs('source');
         LatLng destinationLatLng = getTripLatLngFromSharedPrefs('destination');
@@ -19,5 +23,8 @@ Widget viewRouteFaButton(BuildContext context) {
             MaterialPageRoute(
                 builder: (_) => ViewRoute(modifiedResponse: modifiedResponse)));
       },
-      label: const Text('View Route'));
+      label: const Text(
+        'View Route',
+        selectionColor: Colors.white,
+      ));
 }

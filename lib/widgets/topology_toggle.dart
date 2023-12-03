@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TopologyToggle extends StatefulWidget {
-  const TopologyToggle({super.key});
-
+  const TopologyToggle({Key? key}) : super(key: key);
   @override
   State<TopologyToggle> createState() => _TopologyToggleState();
 }
@@ -23,7 +22,8 @@ captureSelection(List<Option> options) async {
 }
 
 class _TopologyToggleState extends State<TopologyToggle> {
-  List tSelections = [true, true, true, true];
+  static List tSelections = [true, true, true, true];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,8 +34,8 @@ class _TopologyToggleState extends State<TopologyToggle> {
           onChanged: (bool? value) {
             setState(() {
               option.isSelected = value!;
-              tSelections = captureSelection(options);
-              Navigator.pop(context, [tSelections]);
+              //tSelections = captureSelection(options) as List;
+              //Navigator.pop(context, [tSelections]);
             });
           },
         );

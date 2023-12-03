@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nav_application/widgets/topology_toggle.dart';
 
 import '../widgets/amenity_toggle.dart';
+import '../widgets/topology_toggle.dart';
 
 class HomeBottomBar extends StatefulWidget {
-  const HomeBottomBar({super.key});
+  const HomeBottomBar({Key? key}) : super(key: key);
 
   @override
   State<HomeBottomBar> createState() => _HomeBottomBarState();
@@ -48,9 +48,7 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
                   scrollable: true,
                   title: const Text("Street Topologies"),
                   content: const Padding(
-                    padding: EdgeInsets.all(0),
-                    child: TopologyToggle(),
-                  ),
+                      padding: EdgeInsets.all(0), child: TopologyToggle()),
                   actions: [
                     ElevatedButton(
                       child: const Text("Done"),
@@ -98,4 +96,11 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
       },
     );
   }
+}
+
+class Option {
+  final String label;
+  bool isSelected;
+
+  Option(this.label, this.isSelected);
 }

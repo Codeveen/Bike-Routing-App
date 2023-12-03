@@ -63,6 +63,7 @@ class _PrepareRouteState extends State<PrepareRoute> {
         title: const Text('Prepare Route'),
         centerTitle: true,
         titleTextStyle: GoogleFonts.raleway(fontSize: 25),
+        backgroundColor: Colors.blue,
       ),
       body: SafeArea(
           child: SingleChildScrollView(

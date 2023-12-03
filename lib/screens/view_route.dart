@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:mapbox_gl/mapbox_gl.dart';
-import '../helpers/camera_position.dart';
-import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 
 import '../helpers/commons.dart';
 import '../helpers/shared_prefs.dart';
@@ -20,7 +17,7 @@ class ViewRoute extends StatefulWidget {
 class _ViewRouteState extends State<ViewRoute> {
   // Mapbox Maps SDK related
   final List<CameraPosition> _kTripEndPoints = [];
-  late MapBoxNavigationViewController controller;
+  late MaplibreMapController controller;
   late CameraPosition _initialCameraPosition;
 
   // Directions API response related
@@ -44,6 +41,7 @@ class _ViewRouteState extends State<ViewRoute> {
     super.initState();
   }
 
+  // TODO: Fix time and distance to be relavent
   _initialiseDirectionsResponse() {
     distance =
         (widget.modifiedResponse['distance'] / 1609.344).toStringAsFixed(1);
@@ -51,7 +49,7 @@ class _ViewRouteState extends State<ViewRoute> {
     geometry = widget.modifiedResponse['geometry'];
   }
 
-  _onMapCreated(MapBoxNavigationViewController controller) async {
+  _onMapCreated(MaplibreMapController controller) async {
     this.controller = controller;
   }
 
@@ -89,10 +87,10 @@ class _ViewRouteState extends State<ViewRoute> {
       "fills",
       "lines",
       LineLayerProperties(
-        lineColor: Colors.indigo,
+        lineColor: Colors.indigo.toHexStringRGB(),
         lineCap: "round",
         lineJoin: "round",
-        lineWidth: 4,
+        lineWidth: 3,
       ),
     );
   }
@@ -104,19 +102,19 @@ class _ViewRouteState extends State<ViewRoute> {
         title: const Text('Review Ride'),
         centerTitle: true,
         titleTextStyle: GoogleFonts.raleway(fontSize: 25),
+        backgroundColor: Colors.blue,
       ),
       body: SafeArea(
         child: Stack(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height,
-              child: MapboxMap(
-                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+              child: MaplibreMap(
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(11, 16),
+                minMaxZoomPreference: const MinMaxZoomPreference(11, 14),
               ),
             ),
             viewRideBottomSheet(context, distance, dropOffTime),
