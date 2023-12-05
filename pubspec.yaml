@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  latlong2: ^0.8.0
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.13
   flutter_native_splash: ^2.0.4
@@ -20,12 +21,15 @@ dependencies:
   intl: ^0.17.0
   graphhooper_route_navigation: ^0.0.3
   get: ^4.6.5
-  flutter_mapbox_navigation: ^0.0.26
-  maplibre_gl:
-      git:
-        url: https://github.com/maplibre/flutter-maplibre-gl.git
-        ref: main
+  mapbox_gl: ^0.16.0
+  # flutter_mapbox_navigation: ^0.0.26
+  # maplibre_gl:
+  #     git:
+  #       url: https://github.com/maplibre/flutter-maplibre-gl.git
+  #       ref: main
 
+dependency_overrides:
+  image: ^4.0.17 # Use the version compatible with maplibre_gl
 
 dev_dependencies:
   flutter_test:

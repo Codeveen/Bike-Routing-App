@@ -1,4 +1,4 @@
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../requests/directions.dart';
 import '../requests/rev_geocoding.dart';

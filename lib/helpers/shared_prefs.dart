@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../main.dart';
 

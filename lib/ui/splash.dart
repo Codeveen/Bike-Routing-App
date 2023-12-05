@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/mapbox_handler.dart';
 import '../main.dart';

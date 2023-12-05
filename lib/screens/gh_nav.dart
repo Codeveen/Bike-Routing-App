@@ -3,9 +3,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:graphhooper_route_navigation/graphhooper_route_navigation.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:nav_application/helpers/shared_prefs.dart';
+
 
 class GHNav extends StatefulWidget {
   const GHNav({super.key});
@@ -18,25 +21,10 @@ class GHNav extends StatefulWidget {
 }
 
 class GHNavState extends State<GHNav> {
-  late MaplibreMapController controller;
+  late MapboxMapController controller;
   // ScrollController? draggableSheetController;
   int selectedStyleId = 0;
-  UserLocation? userLocation = UserLocation(
-      position: const LatLng(28.987280, 80.1652),
-      altitude: 1200.0,
-      bearing: 0.0,
-      speed: 0.0,
-      horizontalAccuracy: 0.0,
-      verticalAccuracy: 0.0,
-      timestamp: DateTime.now(),
-      heading: UserHeading(
-          magneticHeading: 0.0,
-          trueHeading: 0.0,
-          headingAccuracy: 0.0,
-          x: 0.0,
-          y: 0.0,
-          z: 0.0,
-          timestamp: DateTime.now()));
+  LatLng userLocation = getCurrentLatLngFromSharedPrefs();
   bool isInitialize = false;
 
   double markerSize = 0.5;
@@ -46,10 +34,7 @@ class GHNavState extends State<GHNav> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String mapAccessToken =
-      'pk.eyJ1IjoiYmRiZXJnZXZpbiIsImEiOiJjbG8zNzg5YnAxcnFsMmpvOXkxbjI3N3ZmIn0.m9lc1OqpRbuurF5y7mo3YQ';
-
-  _onMapCreated(MaplibreMapController controller) async {
+  _onMapCreated(MapboxMapController controller) async {
     this.controller = controller;
 
     controller.onFeatureTapped.add(onFeatureTap);
@@ -87,7 +72,7 @@ class GHNavState extends State<GHNav> {
   _onStyleLoadedCallback() async {
     controller.animateCamera(
       CameraUpdate.newCameraPosition(
-          CameraPosition(target: userLocation!.position, zoom: 13.0)),
+          CameraPosition(target: userLocation, zoom: 13.0)),
     );
   }
 
@@ -112,11 +97,15 @@ class GHNavState extends State<GHNav> {
     ApiRequest apiRequest = ApiRequest();
 
     directionRouteResponse = await apiRequest.getDrivingRouteUsingGraphHooper(
-        customBaseUrl: '',
-        source: userLocation!.position,
-        destination: latLng,
-        navigationType: NavigationProfile.car,
-        graphHooperApiKey: '0f33aa96-74ba-4e6f-9da6-720a08c91520');
+    customBaseUrl: '',
+    source: LatLng(
+      userLocation.latitude,
+      userLocation.longitude,
+),
+    destination: latLng,
+    navigationType: NavigationProfile.car,
+    graphHooperApiKey: '0f33aa96-74ba-4e6f-9da6-720a08c91520'
+);
 
     if (directionRouteResponse.toJson().isNotEmpty) {
       print("getData");
@@ -216,7 +205,7 @@ class GHNavState extends State<GHNav> {
                 // Get.back();
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Get.to(MapRouteNavigationScreenPage(
-                      directionRouteResponse, mapAccessToken));
+                      directionRouteResponse, dotenv.env['MAPBOX_ACCESS_TOKEN']!));
                 });
               },
               icon: const Icon(
@@ -245,13 +234,13 @@ class GHNavState extends State<GHNav> {
   }
 
   buildMapUI() {
-    return MaplibreMap(
+    return MapboxMap(
       //styleString:
       //'https://tiles.basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
       onMapCreated: _onMapCreated,
       onStyleLoadedCallback: _onStyleLoadedCallback,
       initialCameraPosition: CameraPosition(
-        target: userLocation!.position,
+        target: userLocation,
         zoom: mapZoomLevel,
       ),
       minMaxZoomPreference: const MinMaxZoomPreference(5, 19),
@@ -262,30 +251,29 @@ class GHNavState extends State<GHNav> {
       myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
       myLocationRenderMode: MyLocationRenderMode.GPS,
       onMapClick: (point, latLng) {
-        getDataFromTheServer(latLng);
+        getDataFromTheServer((latLng));
       },
       onUserLocationUpdated: (userLocation1) {
-        userLocation = userLocation1;
+        userLocation = userLocation1.position;
         controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-            target: LatLng(userLocation!.position.latitude,
-                userLocation!.position.longitude),
-            zoom: mapZoomLevel,
-            bearing: userLocation!.bearing!)));
+            target: LatLng(userLocation.latitude,
+                userLocation!.longitude),
+            zoom: mapZoomLevel)));
       },
       // cameraTargetBounds: CameraTargetBounds(LatLngBounds( southwest: const LatLng( 25.873742 ,79.338507), northeast: const LatLng(28.147416, 89.009072))),
     );
   }
 
   void onFeatureTap(id, Point<double> point, LatLng coordinates) {
-    print("onFeatureTap");
-    if (directionRouteResponse.toJson().isNotEmpty) {
-      Get.bottomSheet(
-        buildNavigateToBottomSheetUI(directionRouteResponse),
-        enableDrag: true,
-        persistent: false,
-        ignoreSafeArea: true,
-        isScrollControlled: true,
-      );
-    }
+  print("onFeatureTap");
+  if (directionRouteResponse.toJson().isNotEmpty) {
+    Get.bottomSheet(
+      buildNavigateToBottomSheetUI(directionRouteResponse),
+      enableDrag: true,
+      persistent: false,
+      ignoreSafeArea: true,
+      isScrollControlled: true,
+    );
   }
+}
 }

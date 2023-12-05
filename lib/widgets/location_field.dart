@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/mapbox_handler.dart';
 import '../helpers/shared_prefs.dart';

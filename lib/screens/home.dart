@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/shared_prefs.dart';
 import '../screens/prepare_route.dart';
@@ -15,7 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   LatLng latLng = getCurrentLatLngFromSharedPrefs();
   late CameraPosition _initialCameraPosition;
-  late MaplibreMapController controller;
+  late MapboxMapController controller;
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
     _initialCameraPosition = CameraPosition(target: latLng, zoom: 12);
   }
 
-  _onMapCreated(MaplibreMapController controller) async {
+  _onMapCreated(MapboxMapController controller) async {
     this.controller = controller;
   }
 
@@ -38,7 +39,8 @@ class _HomeState extends State<Home> {
             SizedBox(
               // Display Map
               height: MediaQuery.of(context).size.height * 0.9,
-              child: MaplibreMap(
+              child: MapboxMap(
+                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,

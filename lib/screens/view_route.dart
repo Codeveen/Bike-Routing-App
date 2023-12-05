@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 import '../helpers/commons.dart';
 import '../helpers/shared_prefs.dart';
 import '../widgets/view_ride_bottom_sheet.dart';
+
 
 class ViewRoute extends StatefulWidget {
   final Map modifiedResponse;
@@ -17,7 +19,7 @@ class ViewRoute extends StatefulWidget {
 class _ViewRouteState extends State<ViewRoute> {
   // Mapbox Maps SDK related
   final List<CameraPosition> _kTripEndPoints = [];
-  late MaplibreMapController controller;
+  late MapboxMapController controller;
   late CameraPosition _initialCameraPosition;
 
   // Directions API response related
@@ -49,7 +51,7 @@ class _ViewRouteState extends State<ViewRoute> {
     geometry = widget.modifiedResponse['geometry'];
   }
 
-  _onMapCreated(MaplibreMapController controller) async {
+  _onMapCreated(MapboxMapController controller) async {
     this.controller = controller;
   }
 
@@ -109,7 +111,8 @@ class _ViewRouteState extends State<ViewRoute> {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height,
-              child: MaplibreMap(
+              child: MapboxMap(
+                accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
