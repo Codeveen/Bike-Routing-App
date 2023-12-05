@@ -7,7 +7,6 @@ import '../helpers/commons.dart';
 import '../helpers/shared_prefs.dart';
 import '../widgets/view_ride_bottom_sheet.dart';
 
-
 class ViewRoute extends StatefulWidget {
   final Map modifiedResponse;
   const ViewRoute({Key? key, required this.modifiedResponse}) : super(key: key);

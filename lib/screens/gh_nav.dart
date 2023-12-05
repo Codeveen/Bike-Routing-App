@@ -9,7 +9,6 @@ import 'package:graphhooper_route_navigation/graphhooper_route_navigation.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:nav_application/helpers/shared_prefs.dart';
 
-
 class GHNav extends StatefulWidget {
   const GHNav({super.key});
 
@@ -24,7 +23,8 @@ class GHNavState extends State<GHNav> {
   late MapboxMapController controller;
   // ScrollController? draggableSheetController;
   int selectedStyleId = 0;
-  LatLng userLocation = getCurrentLatLngFromSharedPrefs();
+  LatLng userLocation = getTripLatLngFromSharedPrefs('source');
+  LatLng destination = getTripLatLngFromSharedPrefs('destination');
   bool isInitialize = false;
 
   double markerSize = 0.5;
@@ -76,52 +76,22 @@ class GHNavState extends State<GHNav> {
     );
   }
 
-  Symbol? symbol;
-  getDataFromTheServer(LatLng latLng) async {
-    debugPrint(
-      'getDataFromTheServer LatLng: ${latLng.toString()}  \n',
-    );
-
-    try {
-      controller!.removeSymbol(symbol!);
-    } catch (exception) {
-      debugPrint('$exception');
-    }
-
-    symbol = await controller.addSymbol(SymbolOptions(
-      geometry: latLng,
-      iconSize: markerSize,
-      iconImage: "assets/icon/health_icon.png",
-    ));
-
+  getDataFromTheServer() async {
     ApiRequest apiRequest = ApiRequest();
 
     directionRouteResponse = await apiRequest.getDrivingRouteUsingGraphHooper(
-    customBaseUrl: '',
-    source: LatLng(
-      userLocation.latitude,
-      userLocation.longitude,
-),
-    destination: latLng,
-    navigationType: NavigationProfile.car,
-    graphHooperApiKey: '0f33aa96-74ba-4e6f-9da6-720a08c91520'
-);
+        customBaseUrl: '',
+        source: userLocation,
+        destination: destination,
+        navigationType: NavigationProfile.car,
+        graphHooperApiKey: '0f33aa96-74ba-4e6f-9da6-720a08c91520');
 
     if (directionRouteResponse.toJson().isNotEmpty) {
-      print("getData");
       _addSourceAndLineLayer(directionRouteResponse);
     }
-
-    // Fluttertoast.showToast(msg: 'Feature ID: ${featureId.toString()} \n '
-    //     'details: ${placesDetailsDatabaseModel.toMap().toString()}');
   }
 
   _addSourceAndLineLayer(DirectionRouteResponse directionRouteResponse) async {
-    // Can animate camera to focus on the item
-    // controller!.animateCamera(CameraUpdate.newCameraPosition(_kRestaurantsList[index]));
-
-    // Add a polyLine between source and destination
-    // Map geometry = getGeometryFromSharedPrefs(carouselData[index]['index']);
     final _fills = {
       "type": "FeatureCollection",
       "features": [
@@ -159,8 +129,6 @@ class GHNavState extends State<GHNav> {
 
   CalculatorUtils calculatorUtils = CalculatorUtils();
   buildNavigateToBottomSheetUI(DirectionRouteResponse directionRouteResponse) {
-    _addSourceAndLineLayer(directionRouteResponse);
-
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -204,8 +172,8 @@ class GHNavState extends State<GHNav> {
               onPressed: () async {
                 // Get.back();
                 SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Get.to(MapRouteNavigationScreenPage(
-                      directionRouteResponse, dotenv.env['MAPBOX_ACCESS_TOKEN']!));
+                  Get.to(MapRouteNavigationScreenPage(directionRouteResponse,
+                      dotenv.env['MAPBOX_ACCESS_TOKEN']!));
                 });
               },
               icon: const Icon(
@@ -225,18 +193,25 @@ class GHNavState extends State<GHNav> {
   @override
   Widget build(BuildContext context) {
     markerSize = (MediaQuery.of(context).size.width * 0.0015);
+    getDataFromTheServer();
 
     // TODO: implement build
     return Scaffold(
       key: _scaffoldKey,
-      body: buildMapUI(),
+      body: FloatingActionButton(
+        onPressed: () async {
+          // Get.back();
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Get.to(MapRouteNavigationScreenPage(
+                directionRouteResponse, dotenv.env['MAPBOX_ACCESS_TOKEN']!));
+          });
+        },
+      ),
     );
   }
 
   buildMapUI() {
     return MapboxMap(
-      //styleString:
-      //'https://tiles.basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
       onMapCreated: _onMapCreated,
       onStyleLoadedCallback: _onStyleLoadedCallback,
       initialCameraPosition: CameraPosition(
@@ -251,29 +226,29 @@ class GHNavState extends State<GHNav> {
       myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
       myLocationRenderMode: MyLocationRenderMode.GPS,
       onMapClick: (point, latLng) {
-        getDataFromTheServer((latLng));
+        getDataFromTheServer();
       },
       onUserLocationUpdated: (userLocation1) {
         userLocation = userLocation1.position;
         controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-            target: LatLng(userLocation.latitude,
-                userLocation!.longitude),
+            target: LatLng(userLocation.latitude, userLocation!.longitude),
             zoom: mapZoomLevel)));
       },
-      // cameraTargetBounds: CameraTargetBounds(LatLngBounds( southwest: const LatLng( 25.873742 ,79.338507), northeast: const LatLng(28.147416, 89.009072))),
     );
   }
 
   void onFeatureTap(id, Point<double> point, LatLng coordinates) {
-  print("onFeatureTap");
-  if (directionRouteResponse.toJson().isNotEmpty) {
-    Get.bottomSheet(
-      buildNavigateToBottomSheetUI(directionRouteResponse),
-      enableDrag: true,
-      persistent: false,
-      ignoreSafeArea: true,
-      isScrollControlled: true,
-    );
+    print("onFeatureTap");
+    if (directionRouteResponse.toJson().isNotEmpty) {
+      Get.bottomSheet(
+        buildNavigateToBottomSheetUI(directionRouteResponse),
+        enableDrag: true,
+        persistent: false,
+        ignoreSafeArea: true,
+        isScrollControlled: true,
+      );
+    } else {
+      print("NULL");
+    }
   }
-}
 }
