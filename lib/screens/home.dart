@@ -41,12 +41,14 @@ class _HomeState extends State<Home> {
               height: MediaQuery.of(context).size.height * 0.9,
               child: MapboxMap(
                 accessToken: dotenv.env['MAPBOX_ACCESS_TOKEN'],
+                styleString:
+                    'mapbox://styles/bdbergevin/clpo2938n00le01p6fqub714x',
                 initialCameraPosition: _initialCameraPosition,
                 onMapCreated: _onMapCreated,
                 onStyleLoadedCallback: _onStyleLoadedCallback,
                 myLocationEnabled: true,
                 myLocationTrackingMode: MyLocationTrackingMode.TrackingGPS,
-                minMaxZoomPreference: const MinMaxZoomPreference(14, 17),
+                minMaxZoomPreference: const MinMaxZoomPreference(14, 20),
               ),
             ),
             // Return to Current Location Button

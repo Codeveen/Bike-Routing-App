@@ -19,8 +19,7 @@ Future<List> getParsedResponseForQuery(String value) async {
   if (query == '') return parsedResponses;
 
   // Else search and then send response
-  var response = /*json.decode(*/
-      await getSearchResultsFromQueryUsingMapbox(query) /*)*/;
+  var response = await getSearchResultsFromQueryUsingMapbox(query);
 
   List features = response['features'];
   for (var feature in features) {
@@ -29,7 +28,8 @@ Future<List> getParsedResponseForQuery(String value) async {
       'address': feature['place_name'].split(',')[0],
       'place': feature['place_name'],
       'postcode': feature['place_name'].split('${feature['text']}, ')[1],
-      'location': LatLng(feature['center'][1], feature['center'][0])
+      'location': LatLng(feature['center'][1], feature['center'][0]),
+      'zipcode': feature['place_name'].split(',')[2].split(' ')[2],
     };
     parsedResponses.add(response);
   }
@@ -45,7 +45,8 @@ Future<Map> getParsedReverseGeocoding(LatLng latLng) async {
     'address': feature['place_name'].split(',')[0],
     'place': feature['place_name'],
     'postcode': feature['place_name'].split('${feature['text']}, ')[1],
-    'location': latLng
+    'location': latLng,
+    'zipcode': feature['place_name'].split(',')[2].split(' ')[2],
   };
   return revGeocode;
 }
@@ -65,10 +66,4 @@ Future<Map> getDirectionsAPIResponse(
     "distance": distance,
   };
   return modifiedResponse;
-}
-
-LatLng getCenterCoordinatesForPolyline(Map geometry) {
-  List coordinates = geometry['coordinates'];
-  int pos = (coordinates.length / 2).round();
-  return LatLng(coordinates[pos][1], coordinates[pos][0]);
 }

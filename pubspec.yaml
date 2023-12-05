@@ -22,6 +22,7 @@ dependencies:
   graphhooper_route_navigation: ^0.0.3
   get: ^4.6.5
   mapbox_gl: ^0.16.0
+  path_provider: ^2.1.1
   # flutter_mapbox_navigation: ^0.0.26
   # maplibre_gl:
   #     git:

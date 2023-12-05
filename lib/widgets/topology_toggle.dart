@@ -22,7 +22,7 @@ captureSelection(List<Option> options) async {
 }
 
 class _TopologyToggleState extends State<TopologyToggle> {
-  static List tSelections = [true, true, true, true];
+  List selections = [1, 0, 1, 0];
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,6 @@ class _TopologyToggleState extends State<TopologyToggle> {
           onChanged: (bool? value) {
             setState(() {
               option.isSelected = value!;
-              //tSelections = captureSelection(options) as List;
-              //Navigator.pop(context, [tSelections]);
             });
           },
         );

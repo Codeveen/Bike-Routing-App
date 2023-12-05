@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/amenity_toggle.dart';
@@ -11,9 +13,9 @@ class HomeBottomBar extends StatefulWidget {
 }
 
 class _HomeBottomBarState extends State<HomeBottomBar> {
-  List tSelections = [true, true, true, true];
-  List aSelections = [];
   int selectedIndex = 0;
+
+  Map<Bool, dynamic> selection = {};
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +49,9 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
                 return AlertDialog(
                   scrollable: true,
                   title: const Text("Street Topologies"),
-                  content: const Padding(
-                      padding: EdgeInsets.all(0), child: TopologyToggle()),
+                  content: Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: TopologyToggle()),
                   actions: [
                     ElevatedButton(
                       child: const Text("Done"),
