@@ -28,7 +28,7 @@ class _ViewRouteState extends State<ViewRoute> {
 
   @override
   void initState() {
-    // initialise distance, dropOffTime, geometry
+    // initialise distance, time, geometry
     _initialiseDirectionsResponse();
 
     // initialise initialCameraPosition, address and trip end points
@@ -42,7 +42,7 @@ class _ViewRouteState extends State<ViewRoute> {
     super.initState();
   }
 
-  // TODO: Fix time and distance to be relavent
+  // Extract geometry, distance and time from API response
   _initialiseDirectionsResponse() {
     distance =
         (widget.modifiedResponse['distance'] / 1609.344).toStringAsFixed(1);

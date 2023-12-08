@@ -21,8 +21,5 @@ Future getCyclingRouteUsingMapbox(LatLng source, LatLng destination) async {
     return responseData.data;
   } on DioExceptions catch (e) {
     log(e.toString());
-    /*final errorMessage = DioExceptions.fromDioError(e as DioError).toString();
-    debugPrint(errorMessage);*/
-    // check response.data
   }
 }

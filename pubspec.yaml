@@ -1,7 +1,7 @@
 name: nav_application
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -22,15 +22,9 @@ dependencies:
   graphhooper_route_navigation: ^0.0.3
   get: ^4.6.5
   mapbox_gl: ^0.16.0
-  path_provider: ^2.1.1
-  # flutter_mapbox_navigation: ^0.0.26
-  # maplibre_gl:
-  #     git:
-  #       url: https://github.com/maplibre/flutter-maplibre-gl.git
-  #       ref: main
 
 dependency_overrides:
-  image: ^4.0.17 # Use the version compatible with maplibre_gl
+  image: ^4.0.17
 
 dev_dependencies:
   flutter_test:
