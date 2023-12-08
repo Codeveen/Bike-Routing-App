@@ -1,6 +1,6 @@
-# nav_application
+# Interactive Maps
 
-A new Flutter project.
+A bike routing application for the city of Kalamazoo and Portage, Michigan.
 
 ## Getting Started
 
